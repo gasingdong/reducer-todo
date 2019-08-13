@@ -1,10 +1,5 @@
 import { Reducer } from "react";
-import { Todo } from "../interfaces/TodoInterfaces";
-
-interface TodoAction {
-  type: string;
-  payload: Todo;
-}
+import { Todo, TodoAction } from "../interfaces/TodoInterfaces";
 
 export const initialState: Todo[] = [
   {

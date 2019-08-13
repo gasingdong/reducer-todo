@@ -6,9 +6,13 @@ interface TodoItemProps {
 }
 
 const TodoItem = (props: TodoItemProps): React.ReactElement => {
+  const onClick = (event: React.MouseEvent<HTMLElement>): void => {
+    console.log("finish");
+  };
+
   return (
     <div className="todo-list__item">
-      <h1>{props.todo.item}</h1>
+      <h1 onClick={onClick}>{props.todo.item}</h1>
     </div>
   );
 };

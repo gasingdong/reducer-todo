@@ -3,3 +3,8 @@ export interface Todo {
   completed: boolean;
   id: number;
 }
+
+export interface TodoAction {
+  type: string;
+  payload: Todo;
+}
