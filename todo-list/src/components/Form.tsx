@@ -22,7 +22,8 @@ const Form = (props: FormProps): React.ReactElement => {
     props.addItem({
       item: todo,
       id: Date.now(),
-      completed: false
+      completed: false,
+      tags: []
     });
     setTodo("");
   };

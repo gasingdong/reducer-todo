@@ -11,14 +11,18 @@ const App = (): React.ReactElement => {
   const addItem = (item: Todo): void => {
     todoListDispatcher({
       type: "ADD",
-      payload: item
+      payload: {
+        todo: item,
+      }
     });
   };
 
   const completeItem = (item: Todo): void => {
     todoListDispatcher({
       type: "COMPLETE",
-      payload: item
+      payload: {
+        todo: item,
+      }
     });
   };
 
@@ -27,6 +31,16 @@ const App = (): React.ReactElement => {
       type: "CLEAR"
     });
   };
+
+  const addItemTag = (item: Todo, tag: string) => {
+    todoListDispatcher({
+      type: "TAG",
+      payload: {
+        todo: item,
+        tag: tag,
+      }
+    })
+  } 
 
   return (
     <div className="App">

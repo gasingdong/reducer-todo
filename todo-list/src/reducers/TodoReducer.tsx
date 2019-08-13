@@ -6,12 +6,14 @@ export const initialState: TodoState = {
     {
       item: "Learn about reducers",
       completed: false,
-      id: 2194829104
+      id: 2194829104,
+      tags: []
     },
     {
       item: "Start building todo app",
       completed: false,
-      id: 1285901153
+      id: 1285901153,
+      tags: []
     }
   ]
 };
@@ -20,20 +22,20 @@ export const reducer: Reducer<TodoState, TodoAction> = (
   state,
   action
 ): TodoState => {
+  const { payload } = action;
   switch (action.type) {
     case "ADD":
       return action.payload
         ? {
-            todos: [...state.todos, action.payload]
+            todos: [...state.todos, action.payload.todo]
           }
         : state;
     case "COMPLETE":
-      const { payload } = action;
       return payload
         ? {
             todos: state.todos.map(
               (todo): Todo => {
-                if (todo.id === payload.id) {
+                if (todo.id === payload.todo.id) {
                   return {
                     ...todo,
                     completed: !todo.completed
@@ -48,6 +50,20 @@ export const reducer: Reducer<TodoState, TodoAction> = (
       return {
         todos: state.todos.filter((todo): boolean => !todo.completed)
       };
+    case "TAG":
+      return payload ? {
+        todos: state.todos.map(
+          (todo): Todo => {
+            if (todo.id === payload.todo.id) {
+              return {
+                ...todo,
+                tags: payload.tag ? [...todo.tags, payload.tag] : todo.tags,
+              }
+            }
+            return todo;
+          }
+        )
+      } : state;
     default:
       return state;
   }
