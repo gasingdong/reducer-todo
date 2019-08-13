@@ -10,5 +10,5 @@ export interface Todo {
 
 export interface TodoAction {
   type: string;
-  payload: Todo;
+  payload?: Todo;
 }

@@ -22,23 +22,31 @@ export const reducer: Reducer<TodoState, TodoAction> = (
 ): TodoState => {
   switch (action.type) {
     case "ADD":
-      return {
-        todos: [...state.todos, action.payload]
-      };
-    case "COMPLETE":
-      const id = action.payload.id;
-      return {
-        todos: state.todos.map(
-          (todo): Todo => {
-            if (todo.id === id) {
-              return {
-                ...todo,
-                completed: !todo.completed
-              };
-            }
-            return todo;
+      return action.payload
+        ? {
+            todos: [...state.todos, action.payload]
           }
-        )
+        : state;
+    case "COMPLETE":
+      const { payload } = action;
+      return payload
+        ? {
+            todos: state.todos.map(
+              (todo): Todo => {
+                if (todo.id === payload.id) {
+                  return {
+                    ...todo,
+                    completed: !todo.completed
+                  };
+                }
+                return todo;
+              }
+            )
+          }
+        : state;
+    case "CLEAR":
+      return {
+        todos: state.todos.filter((todo): boolean => !todo.completed)
       };
     default:
       return state;

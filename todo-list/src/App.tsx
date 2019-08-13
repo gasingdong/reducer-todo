@@ -22,9 +22,15 @@ const App = (): React.ReactElement => {
     });
   };
 
+  const clearItems = (): void => {
+    todoListDispatcher({
+      type: "CLEAR"
+    });
+  };
+
   return (
     <div className="App">
-      <Form addItem={addItem} />
+      <Form addItem={addItem} clearItems={clearItems} />
       <TodoList todoList={todoList.todos} completeItem={completeItem} />
     </div>
   );

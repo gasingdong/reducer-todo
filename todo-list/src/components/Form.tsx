@@ -3,6 +3,7 @@ import { Todo } from "../interfaces/TodoInterfaces";
 
 interface FormProps {
   addItem: (item: Todo) => void;
+  clearItems: () => void;
 }
 
 const Form = (props: FormProps): React.ReactElement => {
@@ -10,6 +11,10 @@ const Form = (props: FormProps): React.ReactElement => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setTodo(event.target.value);
+  };
+
+  const onClear = (): void => {
+    props.clearItems();
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -31,6 +36,9 @@ const Form = (props: FormProps): React.ReactElement => {
         onChange={onChange}
       />
       <button type="submit">Add Todo</button>
+      <button type="button" onClick={onClear}>
+        Clear Completed
+      </button>
     </form>
   );
 };
