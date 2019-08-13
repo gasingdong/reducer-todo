@@ -3,6 +3,7 @@ import { Todo } from "../interfaces/TodoInterfaces";
 
 interface TodoAction {
   type: string;
+  payload: Todo;
 }
 
 export const initialState: Todo[] = [
@@ -19,5 +20,10 @@ export const initialState: Todo[] = [
 ];
 
 export const reducer: Reducer<Todo[], TodoAction> = (state, action): Todo[] => {
-  return state;
+  switch (action.type) {
+    case "ADD":
+      return [...state, action.payload];
+    default:
+      return state;
+  }
 };
