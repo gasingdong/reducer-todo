@@ -19,5 +19,5 @@ export const initialState: Todo[] = [
 ];
 
 export const reducer: Reducer<Todo[], TodoAction> = (state, action): Todo[] => {
-  return [];
+  return state;
 };
