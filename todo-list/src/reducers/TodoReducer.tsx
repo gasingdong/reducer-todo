@@ -1,10 +1,5 @@
 import { Reducer } from "react";
-
-interface Todo {
-  item: string;
-  completed: boolean;
-  id: number;
-}
+import { Todo } from "../interfaces/TodoInterfaces";
 
 interface TodoAction {
   type: string;
