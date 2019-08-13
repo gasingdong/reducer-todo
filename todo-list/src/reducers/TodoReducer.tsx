@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { TodoAction, TodoState } from "../interfaces/TodoInterfaces";
+import { TodoAction, TodoState, Todo } from "../interfaces/TodoInterfaces";
 
 export const initialState: TodoState = {
   todos: [
@@ -24,6 +24,21 @@ export const reducer: Reducer<TodoState, TodoAction> = (
     case "ADD":
       return {
         todos: [...state.todos, action.payload]
+      };
+    case "COMPLETE":
+      const id = action.payload.id;
+      return {
+        todos: state.todos.map(
+          (todo): Todo => {
+            if (todo.id === id) {
+              return {
+                ...todo,
+                completed: !todo.completed
+              };
+            }
+            return todo;
+          }
+        )
       };
     default:
       return state;

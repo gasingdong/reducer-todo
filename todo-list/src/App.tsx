@@ -15,10 +15,17 @@ const App = (): React.ReactElement => {
     });
   };
 
+  const completeItem = (item: Todo): void => {
+    todoListDispatcher({
+      type: "COMPLETE",
+      payload: item
+    });
+  };
+
   return (
     <div className="App">
       <Form addItem={addItem} />
-      <TodoList todoList={todoList.todos} />
+      <TodoList todoList={todoList.todos} completeItem={completeItem} />
     </div>
   );
 };
