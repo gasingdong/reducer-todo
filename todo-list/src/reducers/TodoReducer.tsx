@@ -1,23 +1,30 @@
 import { Reducer } from "react";
-import { Todo, TodoAction } from "../interfaces/TodoInterfaces";
+import { TodoAction, TodoState } from "../interfaces/TodoInterfaces";
 
-export const initialState: Todo[] = [
-  {
-    item: "Learn about reducers",
-    completed: false,
-    id: 2194829104
-  },
-  {
-    item: "Start building todo app",
-    completed: false,
-    id: 1285901153
-  }
-];
+export const initialState: TodoState = {
+  todos: [
+    {
+      item: "Learn about reducers",
+      completed: false,
+      id: 2194829104
+    },
+    {
+      item: "Start building todo app",
+      completed: false,
+      id: 1285901153
+    }
+  ]
+};
 
-export const reducer: Reducer<Todo[], TodoAction> = (state, action): Todo[] => {
+export const reducer: Reducer<TodoState, TodoAction> = (
+  state,
+  action
+): TodoState => {
   switch (action.type) {
     case "ADD":
-      return [...state, action.payload];
+      return {
+        todos: [...state.todos, action.payload]
+      };
     default:
       return state;
   }

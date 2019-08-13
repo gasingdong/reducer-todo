@@ -1,3 +1,7 @@
+export interface TodoState {
+  todos: Todo[];
+}
+
 export interface Todo {
   item: string;
   completed: boolean;
