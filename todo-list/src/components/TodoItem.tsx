@@ -1,9 +1,11 @@
 import React from "react";
 import { Todo } from "../interfaces/TodoInterfaces";
+import TagForm from "./TagForm";
 
 interface TodoItemProps {
   todo: Todo;
   completeItem: (item: Todo) => void;
+  addTag: (item: Todo, tag: string) => void;
 }
 
 const TodoItem = (props: TodoItemProps): React.ReactElement => {
@@ -19,6 +21,10 @@ const TodoItem = (props: TodoItemProps): React.ReactElement => {
       }
     >
       <h1 onClick={onClick}>{props.todo.item}</h1>
+      {
+        props.todo.tags.map((tag): React.ReactElement => <p>{tag}</p>)
+      }
+      <TagForm todo={props.todo} addTag={props.addTag} />
     </div>
   );
 };

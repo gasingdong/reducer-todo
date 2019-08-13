@@ -5,6 +5,7 @@ import TodoItem from "./TodoItem";
 interface TodoListProps {
   todoList: Todo[];
   completeItem: (item: Todo) => void;
+  addTag: (item: Todo, tag: string) => void;
 }
 
 const TodoList = (props: TodoListProps): React.ReactElement => {
@@ -16,6 +17,7 @@ const TodoList = (props: TodoListProps): React.ReactElement => {
             key={todo.id}
             todo={todo}
             completeItem={props.completeItem}
+            addTag={props.addTag}
           />
         )
       )}

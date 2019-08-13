@@ -45,7 +45,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Form addItem={addItem} clearItems={clearItems} />
-      <TodoList todoList={todoList.todos} completeItem={completeItem} />
+      <TodoList todoList={todoList.todos} completeItem={completeItem} addTag={addItemTag} />
     </div>
   );
 };
