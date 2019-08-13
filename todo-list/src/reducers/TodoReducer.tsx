@@ -1,23 +1,6 @@
 import { Reducer } from "react";
 import { TodoAction, TodoState, Todo } from "../interfaces/TodoInterfaces";
 
-export const initialState: TodoState = {
-  todos: [
-    {
-      item: "Learn about reducers",
-      completed: false,
-      id: 2194829104,
-      tags: []
-    },
-    {
-      item: "Start building todo app",
-      completed: false,
-      id: 1285901153,
-      tags: []
-    }
-  ]
-};
-
 export const reducer: Reducer<TodoState, TodoAction> = (
   state,
   action
@@ -51,19 +34,21 @@ export const reducer: Reducer<TodoState, TodoAction> = (
         todos: state.todos.filter((todo): boolean => !todo.completed)
       };
     case "TAG":
-      return payload ? {
-        todos: state.todos.map(
-          (todo): Todo => {
-            if (todo.id === payload.todo.id) {
-              return {
-                ...todo,
-                tags: payload.tag ? [...todo.tags, payload.tag] : todo.tags,
+      return payload
+        ? {
+            todos: state.todos.map(
+              (todo): Todo => {
+                if (todo.id === payload.todo.id) {
+                  return {
+                    ...todo,
+                    tags: payload.tag ? [...todo.tags, payload.tag] : todo.tags
+                  };
+                }
+                return todo;
               }
-            }
-            return todo;
+            )
           }
-        )
-      } : state;
+        : state;
     default:
       return state;
   }

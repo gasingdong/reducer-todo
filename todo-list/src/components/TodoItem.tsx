@@ -1,17 +1,22 @@
 import React from "react";
 import { Todo } from "../interfaces/TodoInterfaces";
 import TagForm from "./TagForm";
+import { useTodoContext } from "../contexts/TodoContext";
 
 interface TodoItemProps {
   todo: Todo;
-  completeItem: (item: Todo) => void;
-  addTag: (item: Todo, tag: string) => void;
 }
 
 const TodoItem = (props: TodoItemProps): React.ReactElement => {
+  const dispatch = useTodoContext()[1];
+
   const onClick = (): void => {
-    console.log("finish");
-    props.completeItem(props.todo);
+    dispatch({
+      type: "COMPLETE",
+      payload: {
+        todo: props.todo
+      }
+    });
   };
 
   return (
@@ -21,10 +26,12 @@ const TodoItem = (props: TodoItemProps): React.ReactElement => {
       }
     >
       <h1 onClick={onClick}>{props.todo.item}</h1>
-      {
-        props.todo.tags.map((tag): React.ReactElement => <p>{tag}</p>)
-      }
-      <TagForm todo={props.todo} addTag={props.addTag} />
+      {props.todo.tags.map(
+        (tag): React.ReactElement => (
+          <p key={tag}>{tag}</p>
+        )
+      )}
+      <TagForm todo={props.todo} />
     </div>
   );
 };

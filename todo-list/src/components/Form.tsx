@@ -1,29 +1,32 @@
 import React, { useState } from "react";
-import { Todo } from "../interfaces/TodoInterfaces";
+import { useTodoContext } from "../contexts/TodoContext";
 
-interface FormProps {
-  addItem: (item: Todo) => void;
-  clearItems: () => void;
-}
-
-const Form = (props: FormProps): React.ReactElement => {
+const Form = (): React.ReactElement => {
   const [todo, setTodo] = useState("");
+  const dispatch = useTodoContext()[1];
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setTodo(event.target.value);
   };
 
   const onClear = (): void => {
-    props.clearItems();
+    dispatch({
+      type: "CLEAR"
+    });
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    props.addItem({
-      item: todo,
-      id: Date.now(),
-      completed: false,
-      tags: []
+    dispatch({
+      type: "ADD",
+      payload: {
+        todo: {
+          item: todo,
+          id: Date.now(),
+          completed: false,
+          tags: []
+        }
+      }
     });
     setTodo("");
   };

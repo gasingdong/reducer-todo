@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Todo } from "../interfaces/TodoInterfaces";
+import { useTodoContext } from "../contexts/TodoContext";
 
 interface TagFormProps {
   todo: Todo;
-  addTag: (item: Todo, tag: string) => void;
 }
 
 const TagForm = (props: TagFormProps): React.ReactElement => {
   const [tag, setTag] = useState("");
+  const dispatch = useTodoContext()[1];
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setTag(event.target.value);
@@ -15,7 +16,13 @@ const TagForm = (props: TagFormProps): React.ReactElement => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    props.addTag(props.todo, tag);
+    dispatch({
+      type: "TAG",
+      payload: {
+        todo: props.todo,
+        tag: tag
+      }
+    });
     setTag("");
   };
 
